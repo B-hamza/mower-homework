@@ -1,38 +1,17 @@
 package com.homework.mower.domain;
 
-public class Lawn {
-    
-  private final int upOrdinate;
-  private final int rightAbscissa;
+public class Lawn extends Position {
 
   public Lawn(int upOrdinate, int rightAbscissa) {
-    this.upOrdinate = upOrdinate;
-    this.rightAbscissa = rightAbscissa;
+    super(upOrdinate, rightAbscissa);
   }
 
   public int getUpOrdinate() {
-    return upOrdinate;
+    return super.getX();
   }
-  
+
   public int getRightAbscissa() {
-    return rightAbscissa;
+    return super.getY();
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    Lawn lawn = (Lawn) o;
-
-    if (upOrdinate != lawn.upOrdinate) return false;
-    return rightAbscissa == lawn.rightAbscissa;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = upOrdinate;
-    result = 31 * result + rightAbscissa;
-    return result;
-  }
 }

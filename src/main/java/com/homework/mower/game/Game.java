@@ -5,9 +5,11 @@ import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import com.homework.mower.domain.Direction;
 import com.homework.mower.domain.Instructions;
 import com.homework.mower.domain.Lawn;
 import com.homework.mower.domain.Mower;
+import com.homework.mower.domain.Position;
 import com.homework.mower.domain.Instructions.Instruction;
 
 public class Game {
@@ -24,7 +26,12 @@ public class Game {
 
   protected Mower moveMower(Mower mower, Instruction instruction) {
     switch(instruction) {
-      case ADVANCE : return mower.move();
+      case ADVANCE : {
+        if(!checkTondeuseInBorn(mower, new Position(lawn.getUpOrdinate(), lawn.getRightAbscissa())))
+          return mower.move();
+        log.warning("Can not move beyound the bounds");
+        return mower;
+      }
       case LEFT : return mower.turnLeft();
       case RIGHT : return mower.turnRight();
       default :
@@ -39,6 +46,14 @@ public class Game {
       newMower = moveMower(newMower, instruction);
     }
     return newMower;
+  }
+
+  private Boolean checkTondeuseInBorn(Mower mower, Position born) {
+    Position position = mower.getPosition();
+    return (position.getX() == born.getX() && mower.getDirection().equals(Direction.EAST)) ||
+      (position.getX() == 0 && mower.getDirection().equals(Direction.WEST)) ||
+      (position.getY() == born.getY() && mower.getDirection().equals(Direction.NORTH)) ||
+      (position.getY() == 0 && mower.getDirection().equals(Direction.SOUTH));
   }
 
   public List<Mower> play() {

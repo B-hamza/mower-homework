@@ -14,7 +14,8 @@ public class GameTest {
 
   
   List<F> list = Arrays.asList(new F("1 2 N", "5 5" , "LFLFLFLFF", "1 3 N"),
-   new F("3 3 E", "5 5" , "FFRFFRFRRF", "5 1 E"));
+   new F("3 3 E", "5 5" , "FFRFFRFRRF", "5 1 E"),
+   new F("0 0 S", "5 5" , "RFFLFFLFF", "2 0 E"));
 
   @Test
   public void shouldMoveMower() {
